@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.mobile-1.4.0.min.js"></script>
+    <script src="js/wiki.js"></script>
+    <link href="css/jquery.mobile-1.4.0.min.css" rel="stylesheet" />
+    <link href="css/css.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $(".search_input").keyup(function () {
+                var search_input = $(this).val();
+                var keyword = encodeURIComponent(search_input);
+                $.ajax({
+                    type: 'GET',
+                    url: "http://api.duckduckgo.com/?q=define+" + keyword + "&format=json&pretty=1",
+                    //force to handle it as text
+                    dataType: "jsonp",
+                    success: function (data) {
+                        $("#wiki").html("<div>" + data.Definition + "-<a href='" + data.DefinitionURL + "'>Source</a></div>");
+                    }
+                });
+                $.ajax({
+                    type: 'GET',
+                    url: "http://api.duckduckgo.com/?q="+keyword+"&format=json&pretty=1",
+                    //force to handle it as text
+                    dataType: "jsonp",
+                    success: function (data) {
+                        document.getElementById("wiki1").innerHTML = "";
+                        var i = 0;
+                        while (data.RelatedTopics[i].Result!=null){
+                            document.getElementById("wiki1").innerHTML += "<div>" + data.RelatedTopics[i].Result + "</div><br>";
+                            ++i;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div data-role="page" id="page1">
+        <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px">
+            <a href="#defaultpanel" data-inline="true" data-theme="none" data-icon="bars" style="opacity:0.5">&nbsp;</a>
+            <h1 style="color:white;text-shadow:none">QuickGuide</h1>
+        </div>
+        <div data-role="content">
+            <input type="search" placeholder="Enter...." id="search" name="search" class='search_input' />
+            <br />
+            <div id="wrapper">
+                <div id="wiki">
+                    <h2>WIKI</h2>
+                </div>
+                
+                <div id="wiki1" style="margin:10px">
+                    <h2>WIKI</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- defaultpanel  -->
+        <div data-role="panel" id="defaultpanel" data-theme="a">
+
+            <div class="panel-content">
+                <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px;margin-bottom:50px;"><h1 style="color:white;text-shadow:none;font-family:'Segoe UI';">menu</h1></div>
+                <ul data-role="listview" data-theme="b">
+                    <li>Definition</li>
+                    <li><a href="images.html" rel="external">Images</a></li>
+                    <li><a href="vids.html" rel="external">Videos</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a></li>
+                </ul>
+
+            </div><!-- /content wrapper for padding -->
+        </div><!-- /defaultpanel -->
+    </div>
+</body>
+</html>

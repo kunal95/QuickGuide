@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.mobile-1.4.0.min.js"></script>
+    <script src="js/wiki.js"></script>
+    <link href="css/jquery.mobile-1.4.0.min.css" rel="stylesheet" />
+    <link href="css/css.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $(".search_input").change(function () {
+
+                var search_input = $(this).val();
+                var keyword = encodeURIComponent(search_input);
+                var yt_url = 'http://gdata.youtube.com/feeds/api/videos?q='+keyword+'&format=5&max-results=1&index=5&v=2&alt=jsonc';
+                    $.ajax({
+                        type: "GET",
+                        url: yt_url,
+                        dataType: "jsonp",
+                        success: function (response) {
+                            if (response.data.items) {
+                                $.each(response.data.items, function (i, data) {
+                                    var video_id = data.id;
+                                    var video_title = data.title;
+                                    var video_viewCount = data.viewCount;
+                                    var w = $(window).width();
+                                    var video_frame = "<iframe width='" + w + "' height='250' src='http://www.youtube.com/embed/" + video_id + "' frameborder='0' type='text/html'></iframe>";
+                                    var final = "<div>" + video_frame + "</div><div id='title'>" + video_title + " Views:" + video_viewCount + "</div>";
+                                    $("#result1").html(final);
+                                });
+                            }
+                            else {
+                                $("#result1").html("<div id='no'>No Video</div>");
+                            }
+                        }
+                    });
+                    var yt_url = 'http://gdata.youtube.com/feeds/api/videos?q=' + keyword + '&format=5&max-results=2&index=5&v=2&alt=jsonc';
+                    $.ajax({
+                        type: "GET",
+                        url: yt_url,
+                        dataType: "jsonp",
+                        success: function (response) {
+                            if (response.data.items) {
+                                $.each(response.data.items, function (i, data) {
+                                    var video_id = data.id;
+                                    var video_title = data.title;
+                                    var video_viewCount = data.viewCount;
+                                    var w = $(window).width();
+                                    var video_frame = "<iframe width='" + w + "' height='250' src='http://www.youtube.com/embed/" + video_id + "' frameborder='0' type='text/html'></iframe>";
+                                    var final = "<div>" + video_frame + "</div><div id='title'>" + video_title + " Views:" + video_viewCount + "</div>";
+                                    $("#result2").html(final);
+                                });
+                            }
+                            else {
+                                $("#result2").html("<div id='no'>No Video</div>");
+                            }
+                        }
+                    });
+                    var yt_url = 'http://gdata.youtube.com/feeds/api/videos?q=' + keyword + '&format=5&max-results=3&index=5&v=2&alt=jsonc';
+                    $.ajax({
+                        type: "GET",
+                        url: yt_url,
+                        dataType: "jsonp",
+                        success: function (response) {
+                            if (response.data.items) {
+                                $.each(response.data.items, function (i, data) {
+                                    var video_id = data.id;
+                                    var video_title = data.title;
+                                    var video_viewCount = data.viewCount;
+                                    var w = $(window).width();
+                                    var video_frame = "<iframe width='" + w + "' height='250' src='http://www.youtube.com/embed/" + video_id + "' frameborder='0' type='text/html'></iframe>";
+                                    var final = "<div>" + video_frame + "</div><div id='title'>" + video_title + " Views:" + video_viewCount + "</div>";
+                                    $("#result3").html(final);
+                                });
+                            }
+                            else {
+                                $("#result3").html("<div id='no'>No Video</div>");
+                            }
+                        }
+                    });
+                    var yt_url = 'http://gdata.youtube.com/feeds/api/videos?q=' + keyword + '&format=5&max-results=4&index=5&v=2&alt=jsonc';
+                    $.ajax({
+                        type: "GET",
+                        url: yt_url,
+                        dataType: "jsonp",
+                        success: function (response) {
+                            if (response.data.items) {
+                                $.each(response.data.items, function (i, data) {
+                                    var video_id = data.id;
+                                    var video_title = data.title;
+                                    var video_viewCount = data.viewCount;
+                                    var w = $(window).width();
+                                    var video_frame = "<iframe width='" + w + "' height='250' src='http://www.youtube.com/embed/" + video_id + "' frameborder='0' type='text/html'></iframe>";
+                                    var final = "<div>" + video_frame + "</div><div id='title'>" + video_title + " Views:" + video_viewCount + "</div>";
+                                    $("#result4").html(final);
+                                });
+                            }
+                            else {
+                                $("#result4").html("<div id='no'>No Video</div>");
+                            }
+                        }
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div data-role="page" id="page1">
+        <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px">
+            <a href="#defaultpanel" data-inline="true" data-theme="none" data-icon="bars" style="opacity:0.5">&nbsp;</a>
+            <h1 style="color:white;text-shadow:none">QuickGuide</h1>
+        </div>
+        <div data-role="content">
+            <input type="search" placeholder="Enter...." id="search" name="search" class='search_input' />
+            <input id="search" type="submit" name="submit" value="Search" data-role="button" data-theme="a"/>
+            <br />
+            <div id="wrapper">
+             
+                <div class="utube"> <div class="result" id="result1"></div></div>
+                <div class="utube"> <div class="result" id="result2"></div></div>
+                <div class="utube"> <div class="result" id="result3"></div></div>
+                <div class="utube"> <div class="result" id="result4"></div></div>
+            </div>
+        </div>
+
+        <!-- defaultpanel  -->
+        <div data-role="panel" id="defaultpanel" data-theme="a">
+
+            <div class="panel-content">
+                <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px;margin-bottom:50px;"><h1 style="color:white;text-shadow:none;font-family:'Segoe UI';">menu</h1></div>
+                <ul data-role="listview" data-theme="b">
+                    <li><a href="index.html" rel="external">Definition</a></li>
+                    <li><a href="images.html" rel="external">Images</a></li>
+                    <li>Videos</li>
+                    <li><a href="books.html" rel="external">Books</a></li>
+                    <li><a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a></li>
+                </ul>
+
+            </div><!-- /content wrapper for padding -->
+        </div><!-- /defaultpanel -->
+    </div>
+</body>
+</html>

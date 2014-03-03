@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.mobile-1.4.0.min.js"></script>
+    <script src="js/wiki.js"></script>
+    <link href="css/jquery.mobile-1.4.0.min.css" rel="stylesheet" />
+    <link href="css/css.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $(".search_input").change(function () {
+                document.getElementById("books").innerHTML = "";
+                var search_input = $(this).val();
+                var keyword = encodeURIComponent(search_input);
+                var googleAPI = "https://www.googleapis.com/books/v1/volumes?q="+keyword;
+
+                // Make a ajax call to get the json data as response.
+                $.getJSON(googleAPI, function (response) {
+
+                    // In console, you can see the response objects
+                    console.log("JSON Data: " + response.items);
+
+                    // Loop through all the items one-by-one
+                    for (var i = 0; i < response.items.length; i++) {
+
+                        // set the item from the response object
+                        var item = response.items[i];
+                        var img = item.volumeInfo.imageLinks.smallThumbnail;
+                        // Set the book title in the div
+                        document.getElementById("books").innerHTML += "<div style='height:80px;border-bottom: 3px solid cadetblue '><div style='width:70px;float:left'><img src='" + img + "'></div><div style='width:75%;float:left'><li><b>" + item.volumeInfo.title + "</b> - " + item.volumeInfo.authors + "<br></li></div></div><br>";
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div data-role="page" id="page1">
+        <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px">
+            <a href="#defaultpanel" data-inline="true" data-theme="none" data-icon="bars" style="opacity:0.5">&nbsp;</a>
+            <h1 style="color:white;text-shadow:none">QuickGuide</h1>
+        </div>
+        <div data-role="content">
+            <input type="search" placeholder="Enter...." id="search" name="search" class='search_input' />
+            <input id="search" type="submit" name="submit" value="Search" data-role="button" data-theme="a" />
+            <br />
+            <div id="wrapper">
+                <div id="books" style="margin-left:5px;margin-right:5px"></div>
+            </div>
+        </div>
+
+        <!-- defaultpanel  -->
+        <div data-role="panel" id="defaultpanel" data-theme="a">
+
+            <div class="panel-content">
+                <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px;margin-bottom:50px;"><h1 style="color:white;text-shadow:none;font-family:'Segoe UI';">menu</h1></div>
+                <ul data-role="listview" data-theme="b">
+                    <li><a href="index.html">Definition</a></li>
+                    <li><a href="images.html" rel="external">Images</a></li>
+                    <li><a href="vids.html" rel="external">Videos</a></li>
+                    <li>Books</li>
+                    <li><a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a></li>
+                </ul>
+
+            </div><!-- /content wrapper for padding -->
+        </div><!-- /defaultpanel -->
+    </div>
+</body>
+</html>
