@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
@@ -10,6 +10,7 @@
     <script>
         $(document).ready(function () {
             $(".search_input").keyup(function () {
+                $("#def").text("Looking in network.....");
                 var search_input = $(this).val();
                 var keyword = encodeURIComponent(search_input);
                 $.ajax({
@@ -50,11 +51,9 @@
             <br />
             <div id="wrapper">
                 <div id="wiki">
-                    <h2>WIKI</h2>
+                    <span id="def">Give a keyword...</span>
                 </div>
-                
                 <div id="wiki1" style="margin:10px">
-                    <h2>WIKI</h2>
                 </div>
             </div>
         </div>
@@ -68,7 +67,7 @@
                     <li>Definition</li>
                     <li><a href="images.html" rel="external">Images</a></li>
                     <li><a href="vids.html" rel="external">Videos</a></li>
-                    <li><a href="books.html">Books</a></li>
+                    <li><a href="books.html" rel="external">Books</a></li>
                     <li><a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a></li>
                 </ul>
 
