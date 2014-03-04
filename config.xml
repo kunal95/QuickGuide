@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>WeatherApp</name>
+    <name>Quick Guide - Ultimate</name>
 
     <description>
-        An HTML5 based simple weather app.
+        An HTML5 based all-in-one guide.
     </description>
 
     <author href="https://build.phonegap.com" email="support@phonegap.com">
