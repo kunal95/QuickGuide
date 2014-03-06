@@ -9,8 +9,11 @@
     <link href="css/css.css" rel="stylesheet" />
     <script>
         $(document).ready(function () {
+            var h = $(window).height();//314
+            $("#credits").css("top", h - 30);
+            $("#credits").touchend(function () { alert("Kunal Sachdeva\nArunima Sharma\nPriyansh Singh") });
+            $("#credits").click(function () { alert("Kunal Sachdeva\nArunima Sharma\nPriyansh Singh") });
             $(".search_input").change(function () {
-
                 var search_input = $(this).val();
                 var keyword = encodeURIComponent(search_input);
                 var yt_url = 'http://gdata.youtube.com/feeds/api/videos?q='+keyword+'&format=5&max-results=1&index=5&v=2&alt=jsonc';
@@ -107,7 +110,7 @@
 </head>
 <body>
     <div data-role="page" id="page1">
-        <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px">
+        <div data-role="header" id="head">
             <a href="#defaultpanel" data-inline="true" data-theme="none" data-icon="bars" style="opacity:0.5">&nbsp;</a>
             <h1 style="color:white;text-shadow:none">QuickGuide</h1>
         </div>
@@ -128,7 +131,8 @@
         <div data-role="panel" id="defaultpanel" data-theme="a">
 
             <div class="panel-content">
-                <div data-role="header" style="background-color: #0071bc;border:2px #0071bc solid;box-shadow:black 0px 0px 20px;margin-bottom:50px;"><h1 style="color:white;text-shadow:none;font-family:'Segoe UI';">menu</h1></div>
+                <div id="credits"><span>CREDITS</span></div>
+                <div data-role="header" id="pnlHeader"><h1 style="color:white;text-shadow:none;font-family:'Segoe UI';">menu</h1></div>
                 <ul data-role="listview" data-theme="b">
                     <li><a href="index.html" rel="external">Definition</a></li>
                     <li><a href="images.html" rel="external">Images</a></li>
