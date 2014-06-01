@@ -10,9 +10,6 @@
     <script>
         $(document).ready(function () {
             var h = $(window).height();//314
-            $("#credits").css("top", h - 30);
-            $("#credits").touchend(function () { alert("Kunal Sachdeva\nArunima Sharma\nPriyansh Singh") });
-            $("#credits").click(function () { alert("Kunal Sachdeva\nArunima Sharma\nPriyansh Singh") });
             $(".search_input").keyup(function () {
                 $("#def").text("Looking in network.....");
                 var search_input = $(this).val();
@@ -67,7 +64,6 @@
         <div data-role="panel" id="defaultpanel" data-theme="a">
 
             <div class="panel-content" style="height:100%">
-                <div id="credits"><span>CREDITS</span></div>
                 <div data-role="header" id="pnlHeader"><h1 style="color:white;text-shadow:none;font-family:'Segoe UI';">menu</h1></div>
                 <ul data-role="listview" data-theme="b">
                     <li>Definition</li>
